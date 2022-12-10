@@ -1,14 +1,32 @@
+// ========== Electron ==========
 const { app, BrowserWindow } = require('electron')
+const server = require('./app');
 
+let win
 const createWindow = () => {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-  })
+	win = new BrowserWindow({
+		width: 1920,
+		height: 1080,
+		webPreferences: {
+			nodeIntegration: true
+		}
+	})
 
-  win.loadFile('index.html')
+	win.loadURL('http://localhost:3000')
+	win.on('closed', function () {
+		win = null
+	})
 }
 
 app.whenReady().then(() => {
-  createWindow()
+	createWindow()
+
+	app.on('activate', () => {
+		if (BrowserWindow.getAllWindows().length === 0) {
+			createWindow();
+		}
+	});
 })
+
+app.on('resize', function (e, x, y) { app.setSize(x, y); });
+app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit() })

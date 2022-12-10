@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Xayah-Hina/StateMonitor#readme",
   "dependencies": {
     "chartjs": "^0.3.24",
+    "ejs": "^3.1.8",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.18.2"
   },
